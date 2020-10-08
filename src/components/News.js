@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Linking, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 import NewsText from "./NewsText";
@@ -17,7 +17,7 @@ const newsStyle = StyleSheet.create({
   }
 })
 
-class News extends Component {
+class News extends React.Component {
   render() {
     return (
       <Card

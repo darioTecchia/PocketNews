@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const logoStyle = StyleSheet.create({
@@ -9,7 +9,7 @@ const logoStyle = StyleSheet.create({
   }
 })
 
-class Logo extends Component {
+class Logo extends React.Component {
   render() {
     return (
       <View>

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import News from "./News";
 import Header from "./Header";
 
-import axiosService from '../utils/lib/axiosService';
+import axiosService from '../../utils/lib/axiosService';
 
-class NewsList extends Component {
+class NewsList extends React.Component {
   state = {
     data: [],
     page: 1,
@@ -17,7 +17,6 @@ class NewsList extends Component {
   };
 
   componentDidMount() {
-    console.log('MOUNT');
     this.fetchNews();
   }
 
@@ -31,9 +30,6 @@ class NewsList extends Component {
       pageSize: 20
     }
 
-    console.log(URL);
-    console.log(params);
-
     axiosService
       .request({
         url: URL,
@@ -41,7 +37,6 @@ class NewsList extends Component {
         params: params
       })
       .then(response => {
-        console.log(response.status);
         this.setState((prevState, nextProps) => ({
           data:
             page === 1
@@ -57,7 +52,6 @@ class NewsList extends Component {
   };
 
   handleScrollEnd = () => {
-    console.log('END');
     this.setState(
       (prevState, nextProps) => ({
         page: prevState.page + 1,
@@ -70,7 +64,6 @@ class NewsList extends Component {
   }
 
   handleRefresh = () => {
-    console.log('REFRESH');
     this.setState(
       {
         page: 1,
@@ -93,7 +86,7 @@ class NewsList extends Component {
         onRefresh={this.handleRefresh}
         keyExtractor={(item, index) => item.title.toString() + index.toString()}
         refreshing={this.state.refreshing}
-        ListHeaderComponent={Header}
+        ListHeaderComponent={() => <Header navigation={this.props.navigation} />}
         renderItem={({ item }) => (
           <News news={item} />
         )} />

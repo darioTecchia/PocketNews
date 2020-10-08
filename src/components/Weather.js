@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
 import styles from '../config/theme';
 
-class Weather extends Component {
+class Weather extends React.Component {
   render() {
     return (
       <Card

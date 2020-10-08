@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, StyleSheet, View, Share } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   }
 })
 
-class NewsText extends Component {
+class NewsText extends React.Component {
   onShare = async (news) => {
     try {
       Share.share({

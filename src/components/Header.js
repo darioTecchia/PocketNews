@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import Greetings from './Greetings';
 import Weather from './Weather';
 import Logo from './Logo';
 
-class Header extends Component {
+class Header extends React.Component {
   render() {
     return (
       <View>
         <Logo/>
-        <Greetings/>
+        <Greetings navigation={this.props.navigation}/>
         <Weather/>
       </View>
     );

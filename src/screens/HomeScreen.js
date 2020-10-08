@@ -1,19 +1,15 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import NewsList from "../../components/NewsList";
-import Weather from "../../components/Weather";
+import NewsList from "../components/NewsList";
 
-const HomeScreen = () => {
-
-  return (
-    <View
-      style={{
-        marginTop: 35,
-      }}
-    >
-      <NewsList></NewsList>
-    </View>
-  );
-};
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <NewsList navigation={this.props.navigation}></NewsList>
+      </View>
+    );
+  }
+}
 
 export default HomeScreen;
