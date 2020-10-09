@@ -6,14 +6,19 @@ import AsyncStorage from '@react-native-community/async-storage';
 import styles from '../config/theme';
 
 const nameStyle = StyleSheet.create({
-  text: {
-    fontSize: 32
-  },
-  view: {
+  nameWrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  mainWrapper: {
+  },
+  inputStyle: {
+    borderColor: 'black',
+    borderBottomWidth: 1,
+    width: '80%',
+    padding: 8,
   }
 })
 
@@ -35,12 +40,12 @@ class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ padding: 10 }}>
+      <View style={nameStyle.mainWrapper}>
         <Card containerStyle={styles.card}>
-          <Text>Saluto</Text>
-          <View style={nameStyle.view}>
+          <Text style={styles.cardTitle}>Saluto</Text>
+          <View style={nameStyle.nameWrapper}>
             <TextInput
-              style={{ height: 40 }}
+              style={nameStyle.inputStyle}
               placeholder="Inserisci il tuo nome"
               onChangeText={text => this.setState({name: text})}
               onSubmitEditing={() => this.handleNameChanges()}
@@ -48,16 +53,11 @@ class SettingsScreen extends React.Component {
             />
             <Button
               onPress={() => this.handleNameChanges()}
-              icon={{
-                name: "save",
-                size: 32,
-                color: "grey"
-              }}
-              title=""
+              style={{ width: '20%' }}
+              title="Salva"
               type="clear"
             />
           </View>
-
         </Card>
       </View>
     );

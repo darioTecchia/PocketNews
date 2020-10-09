@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text, Linking, TouchableWithoutFeedback } from 'react-native';
 import News from "./News";
 import Header from "./Header";
 
