@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import News from "./News";
 import Header from "./Header";
 
@@ -11,9 +11,10 @@ class NewsList extends React.Component {
     page: 1,
     refreshing: false,
     loadingMore: false,
+    allLoaded: false,
     error: null,
     query: 'nasa',
-    country: 'it'
+    country: 'us'
   };
 
   componentDidMount() {
@@ -37,6 +38,12 @@ class NewsList extends React.Component {
         params: params
       })
       .then(response => {
+        if(response.data.articles.length == 0) {
+          this.setState((prevState, nextProps) => ({
+            allLoaded: true
+          }));
+          return;
+        }
         this.setState((prevState, nextProps) => ({
           data:
             page === 1
@@ -67,7 +74,8 @@ class NewsList extends React.Component {
     this.setState(
       {
         page: 1,
-        refreshing: true
+        refreshing: true,
+        allLoaded: false
       },
       () => {
         this.fetchNews();
@@ -87,6 +95,7 @@ class NewsList extends React.Component {
         keyExtractor={(item, index) => item.title.toString() + index.toString()}
         refreshing={this.state.refreshing}
         ListHeaderComponent={() => <Header navigation={this.props.navigation} />}
+        ListFooterComponent={() => <Text></Text>}
         renderItem={({ item }) => (
           <News news={item} />
         )} />

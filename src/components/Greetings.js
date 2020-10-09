@@ -1,6 +1,9 @@
 import React from 'react';
+
 import { Text, StyleSheet, View } from 'react-native';
 import { Card, Button } from 'react-native-elements';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 import moment from 'moment';
 
@@ -11,31 +14,37 @@ const greetingsStyle = StyleSheet.create({
     fontSize: 32
   },
   view: {
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap'
   }
 })
 
 class Greetings extends React.Component {
   state = {
-    greeting: ''
+    greeting: '',
+    name: ''
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setState({
+      name: await AsyncStorage.getItem('name')
+    });
+
     let now = moment().hour();
     if(now >= 5 && now < 12) {
       this.setState({
-        greeting: 'Buongiorno,'
+        greeting: 'Buongiorno'
       })
     } else if(now >= 12 && now < 18) {
       this.setState({
-        greeting: 'Buon pomeriggio,'
+        greeting: 'Buon pomeriggio'
       })
     } else {
       this.setState({
-        greeting: 'Buona sera,'
+        greeting: 'Buona sera'
       })
     }
   }
@@ -46,7 +55,7 @@ class Greetings extends React.Component {
         containerStyle={styles.card}
       >
         <View style={greetingsStyle.view}>
-          <Text style={greetingsStyle.text}>{this.state.greeting} Dario.</Text>
+          <Text style={greetingsStyle.text}>{this.state.greeting}{!this.state.name ? "!": `, ${this.state.name}.`}</Text>
           <Button
               onPress={() => this.props.navigation.navigate('Settings')}
               icon={{
