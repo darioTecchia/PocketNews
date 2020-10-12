@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, StyleSheet, View, Share } from 'react-native';
+
+import { Text, StyleSheet, View, Share, Linking } from 'react-native';
 import { Button } from 'react-native-elements';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import moment from 'moment';
 import 'moment/locale/it'
@@ -38,11 +40,13 @@ class NewsText extends React.Component {
   render() {
     return (
       <View>
-        <Text style={styles.title}>{this.props.news.title}</Text>
+        <TouchableWithoutFeedback onPress={() => Linking.openURL(this.props.news.url)}>
+          <Text style={styles.title}>{this.props.news.title}</Text>
+        </TouchableWithoutFeedback>
         <Text style={styles.description}>{this.props.news.description}</Text>
         <View style={styles.action}>
           <Text>{this.props.news.source.name} - {moment(this.props.news.publishedAt).fromNow()}</Text>
-          
+
           <Button
             onPress={() => this.onShare(this.props.news)}
             icon={{

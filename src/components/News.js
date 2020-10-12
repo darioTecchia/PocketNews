@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, Linking, Image } from 'react-native';
+
+import { StyleSheet, Image } from 'react-native';
 import { Card } from 'react-native-elements';
+
 import NewsText from "./NewsText";
 
 import styles from '../config/theme';
@@ -22,7 +24,6 @@ class News extends React.Component {
     return (
       <Card
         containerStyle={styles.card}
-        onPress={() => Linking.openURL(this.props.news.url)}
       >
         <Image 
           style={newsStyle.cardImage}

@@ -6,6 +6,8 @@ import { Card, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import moment from 'moment';
+import 'moment/locale/it'
+moment.locale('it');
 
 import styles from '../config/theme';
 

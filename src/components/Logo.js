@@ -1,11 +1,11 @@
 import React from 'react';
+
 import { View, Text, StyleSheet } from 'react-native';
 
 const logoStyle = StyleSheet.create({
   logo: {
     textAlign: 'center',
-    fontSize: 48,
-    // padding: 32
+    fontSize: 48
   }
 })
 
