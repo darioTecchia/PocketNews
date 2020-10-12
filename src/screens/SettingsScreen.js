@@ -1,9 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+
+import { StyleSheet, View, Text, TextInput, DeviceEventEmitter } from "react-native";
 import { Card, Button } from 'react-native-elements';
+
 import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from '../config/theme';
+
+import { showMessage } from "react-native-flash-message";
 
 const nameStyle = StyleSheet.create({
   nameWrapper: {
@@ -17,8 +21,9 @@ const nameStyle = StyleSheet.create({
   inputStyle: {
     borderColor: 'black',
     borderBottomWidth: 1,
-    width: '80%',
+    width: '100%',
     padding: 8,
+    paddingLeft: 0
   }
 })
 
@@ -30,9 +35,16 @@ class SettingsScreen extends React.Component {
 
   async handleNameChanges() {
     await AsyncStorage.setItem('name', this.state.name);
+    showMessage({
+      message: "Impostazioni salvate",
+      description: "Le nuove impostazioni sono state salvate con successo",
+      type: "success",
+    });
   }
 
   async componentDidMount() {
+    DeviceEventEmitter.addListener('save-settings', this.handleNameChanges.bind(this));
+
     this.setState({
       name: await AsyncStorage.getItem('name')
     })
@@ -50,12 +62,6 @@ class SettingsScreen extends React.Component {
               onChangeText={text => this.setState({name: text})}
               onSubmitEditing={() => this.handleNameChanges()}
               value={this.state.name}
-            />
-            <Button
-              onPress={() => this.handleNameChanges()}
-              style={{ width: '20%' }}
-              title="Salva"
-              type="clear"
             />
           </View>
         </Card>
