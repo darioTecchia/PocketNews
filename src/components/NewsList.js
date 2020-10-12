@@ -5,7 +5,7 @@ import { FlatList, Text } from 'react-native';
 import News from "./News";
 import Header from "./Header";
 
-import axiosService from '../../utils/lib/axiosService';
+import { axiosNewsService } from '../../utils/lib/axiosServices';
 
 class NewsList extends React.Component {
   state = {
@@ -33,14 +33,14 @@ class NewsList extends React.Component {
       pageSize: 20
     }
 
-    axiosService
+    axiosNewsService
       .request({
         url: URL,
         method: 'GET',
         params: params
       })
       .then(response => {
-        if(response.data.articles.length == 0) {
+        if (response.data.articles.length == 0) {
           this.setState((prevState, nextProps) => ({
             allLoaded: true
           }));
